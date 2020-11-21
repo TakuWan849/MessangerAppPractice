@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         field.leftViewMode = .always
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         
-        field.placeholder = "email address...."
+        field.placeholder = "Email address...."
         return field
         
     }()
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
         field.returnKeyType = .done
         field.isSecureTextEntry = true
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
         field.leftViewMode = .always
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         
-        field.placeholder = "passWord...."
+        field.placeholder = "PassWord...."
         return field
         
     }()
@@ -70,8 +70,9 @@ class LoginViewController: UIViewController {
         button.setTitle("Log in", for: .normal)
         button.backgroundColor = .link
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 52/2
         button.layer.masksToBounds = true
+        
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         
         return button
@@ -81,7 +82,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Log In"
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "bg")
         
         addSubViews()
         configure()

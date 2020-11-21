@@ -31,7 +31,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController {
         field.leftViewMode = .always
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         
-        field.placeholder = "email address...."
+        field.placeholder = "Email address...."
         return field
         
     }()
@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -73,7 +73,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -95,7 +95,7 @@ class RegisterViewController: UIViewController {
         field.returnKeyType = .done
         field.isSecureTextEntry = true
         
-        field.layer.cornerRadius = 52/2
+        field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.layer.masksToBounds = true
@@ -103,7 +103,7 @@ class RegisterViewController: UIViewController {
         field.leftViewMode = .always
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         
-        field.placeholder = "passWord...."
+        field.placeholder = "PassWord...."
         return field
         
     }()
@@ -114,7 +114,7 @@ class RegisterViewController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 52/2
         button.layer.masksToBounds = true
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         
@@ -124,8 +124,8 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Log In"
-        view.backgroundColor = .white
+        title = "Create Account"
+        view.backgroundColor = UIColor(named: "Color")
         
         addSubViews()
         configure()
@@ -194,7 +194,7 @@ class RegisterViewController: UIViewController {
         // TappedRegister
         registerButton.frame = CGRect(
             x: 40,
-            y: passWordField.bottom + 15,
+            y: passWordField.bottom + 30,
             width: scrollView.width - 80,
             height: 52
         )
