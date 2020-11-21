@@ -232,7 +232,10 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    // Change Profile pic
     @objc private func didTapChangeProfilePic() {
+        
         print("Change pic called")
     }
     
