@@ -19,7 +19,11 @@ class RegisterViewController: UIViewController {
        let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.crop.circle")
         imageView.tintColor = .gray
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+         
         return imageView
     }()
     
@@ -158,6 +162,7 @@ class RegisterViewController: UIViewController {
             width: size,
             height: size
         )
+        imageView.layer.cornerRadius = imageView.width / 2.0
         
         // input firstName
         firstNameField.frame = CGRect(
@@ -236,7 +241,7 @@ class RegisterViewController: UIViewController {
     // Change Profile pic
     @objc private func didTapChangeProfilePic() {
         
-        print("Change pic called")
+        presentPhotoActionSheet()
     }
     
     @objc private func didTapRegister() {
@@ -307,4 +312,82 @@ extension RegisterViewController : UITextFieldDelegate {
         return true
     }
 
+}
+
+extension RegisterViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentPhotoActionSheet() {
+        
+        let actionSheet = UIAlertController(title: "Profile Picture",
+                                            message: "How would you like to select a picture?",
+                                            preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel",
+                                            style: .cancel,
+                                            handler: nil))
+        
+        // 写真を撮る -> closureで管理
+        actionSheet.addAction(UIAlertAction(title: "Take Photo",
+                                            style: .default,
+                                            // 同じクラスの関数をクロージャ内に呼び込むために[weak self]が必要
+                                            // 弱参照にして循環参照を防ぐ
+                                            handler: { [weak self] _ in
+                                                
+                                                self?.presentCamera()
+                                                
+                                            }))
+        
+        // 写真を選ぶ -> closureで管理
+        actionSheet.addAction(UIAlertAction(title: "Choose Photo",
+                                            style: .default,
+                                            handler: { [weak self] _ in
+                                                
+                                                self?.presentPhotoPicker()
+                                                
+                                            }))
+        
+        present(actionSheet, animated: true)
+        
+    }
+    
+    // pictureのactionSheet -> closure内で呼ばれる処理の記述
+    func presentCamera() {
+        
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true
+        
+        present(vc, animated: true)
+         
+    }
+    
+    func presentPhotoPicker() {
+        
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        print(info)
+        
+        // アンラップしてダウンキャスト
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        self.imageView.image = selectedImage
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
