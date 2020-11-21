@@ -169,6 +169,10 @@ class LoginViewController: UIViewController {
     
     @objc private func didTapLoginButton() {
         
+        // loginButtonを押すとkeyBoardを閉じる
+        emailField.resignFirstResponder()
+        passWordField.resignFirstResponder()
+        
         // emailField, passWordFieldアンラップする
         guard let email = emailField.text, let password = passWordField.text, !email.isEmpty, !password.isEmpty, password.count >= 6 else {
             alertUserLoginError()
