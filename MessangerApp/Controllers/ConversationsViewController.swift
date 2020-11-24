@@ -39,27 +39,6 @@ class ConversationsViewController: UIViewController {
         configure()
     }
     
-    private func configure() {
-        
-        // tableView
-        view.addSubview(tableView)
-        setUpTableView()
-        
-        // label
-        view.addSubview(noConversationLabel)
-        fetchConversations()
-    }
-    
-    // MARK:- SetUP
-    private func setUpTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    private func fetchConversations() {
-        
-    }
-    
     // MARK:- viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -78,6 +57,39 @@ class ConversationsViewController: UIViewController {
         
     }
     
+    // MARK:- viewDidLayoutSubViews
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.frame = view.bounds
+    }
+    
+    // MARK:- configure
+    private func configure() {
+        
+        // tableView
+        view.addSubview(tableView)
+        setUpTableView()
+        
+        // label
+        view.addSubview(noConversationLabel)
+        fetchConversations()
+    }
+    
+    // MARK:- SetUP
+    private func setUpTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func fetchConversations() {
+        tableView.isHidden = false
+        
+        
+    }
+    
+
+    
 
 }
 
@@ -90,6 +102,8 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Hello world"
+        // cellに「＞」をつける
+        cell.accessoryType = .disclosureIndicator
         
         return cell
     }
