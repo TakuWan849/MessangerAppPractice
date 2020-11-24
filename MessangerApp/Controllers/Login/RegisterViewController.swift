@@ -181,7 +181,7 @@ class RegisterViewController: UIViewController {
             height: 52
         )
         
-        // input email
+        // input email 
         emailField.frame = CGRect(
             x: 30,
             y: lastNameField.bottom + 15,
