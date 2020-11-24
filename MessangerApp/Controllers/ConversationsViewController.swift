@@ -7,8 +7,11 @@
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class ConversationsViewController: UIViewController {
+    
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -89,6 +92,15 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         cell.textLabel?.text = "Hello world"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = ChatViewController()
+        vc.title = "Janny Smith"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
