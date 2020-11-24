@@ -15,7 +15,7 @@ class ConversationsViewController: UIViewController {
 
         view.backgroundColor = .red
         
-        DatabaseManager.shared.test()
+//        DatabaseManager.shared.test()
         
     }
     
