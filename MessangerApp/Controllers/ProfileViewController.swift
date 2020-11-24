@@ -46,18 +46,59 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-            
-            let vc = LoginViewController()
-            let navVC = UINavigationController(rootViewController: vc)
-            navVC.modalPresentationStyle = .fullScreen
-            
-            present(navVC, animated: true)
-        }
-        catch {
-            print("Failed to log out ")
-        }
+        // ログアウト時にアラートを表示して実行
+        logOut()
+        
+//        do {
+//            try FirebaseAuth.Auth.auth().signOut()
+//
+//            let vc = LoginViewController()
+//            let navVC = UINavigationController(rootViewController: vc)
+//            navVC.modalPresentationStyle = .fullScreen
+//
+//            present(navVC, animated: true)
+//        }
+//        catch {
+//            print("Failed to log out ")
+//        }
+    }
+    
+    private func logOut() {
+        
+        let actionSheet = UIAlertController(title: "Log Out",
+                                      message: "",
+                                      preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(
+                            title: "Cancel",
+                            style: .cancel,
+                            handler: nil))
+        
+        actionSheet.addAction(UIAlertAction(
+                            title: "Log Out",
+                            style: .destructive,
+                            handler: { [weak self] _ in
+                                
+                                guard let strongSelf = self else {
+                                    return
+                                }
+                                
+                                do {
+                                    try FirebaseAuth.Auth.auth().signOut()
+                                    
+                                    let vc = LoginViewController()
+                                    let navVC = UINavigationController(rootViewController: vc)
+                                    navVC.modalPresentationStyle = .fullScreen
+                                    
+                                    strongSelf.present(navVC, animated: true)
+                                }
+                                catch {
+                                    print("Failed to log out ")
+                                }
+                                
+                            }))
+        
+        present(actionSheet, animated: true)
     }
     
 }
